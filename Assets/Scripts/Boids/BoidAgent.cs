@@ -79,6 +79,7 @@ public class BoidAgent : MonoBehaviour
         rb.velocity = rb.velocity +  v;
 
 
+
     }
 
     public virtual Vector2 CalculateSeparation()
@@ -88,7 +89,7 @@ public class BoidAgent : MonoBehaviour
         foreach(var neigh in neighbours)
         {
             var t = rb.position - neigh.rb.position;
-            s += new Vector2(t.x, t.y);
+            s += new Vector2(t.x, t.z);
         }
 
         return -s;
@@ -102,10 +103,10 @@ public class BoidAgent : MonoBehaviour
         foreach (var neigh in neighbours)
         {
             var t = neigh.rb.position;
-            c += new Vector2(t.x, t.y);
+            c += new Vector2(t.x, t.z);
         }
         var t2 = rb.position;
-        return neighbours.Count != 0 ? (c / neighbours.Count) - new Vector2(t2.x, t2.y) : Vector2.zero;
+        return neighbours.Count != 0 ? (c / neighbours.Count) - new Vector2(t2.x, t2.z) : Vector2.zero;
     }
 
     public virtual Vector2 CalculateAlignment()
@@ -114,7 +115,7 @@ public class BoidAgent : MonoBehaviour
 
         foreach (var neigh in neighbours)
         {
-            var t = new Vector2(neigh.rb.velocity.x, neigh.rb.velocity.y);
+            var t = new Vector2(neigh.rb.velocity.x, neigh.rb.velocity.z);
             m += t;
         }
 
