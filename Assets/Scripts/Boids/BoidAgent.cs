@@ -32,8 +32,8 @@ public class BoidAgent : MonoBehaviour
 
         var blah = Physics.OverlapSphere(rb.position, Radius_collider.radius, LayerMask.GetMask("Boid"));
 
-        foreach (var neigh in blah)
-            neighbours.Add(neigh.GetComponent<BoidAgent>());
+        //foreach (var neigh in blah)
+        //    neighbours.Add(neigh.GetComponent<BoidAgent>());
 
         rb.velocity = Vector3.forward;
     }
