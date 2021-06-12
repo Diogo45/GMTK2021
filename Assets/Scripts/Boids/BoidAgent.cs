@@ -99,7 +99,7 @@ public class BoidAgent : MonoBehaviour
 
             var tm = t.magnitude;
 
-            if(tm == 0f)
+          
 
             s += new Vector2(t.x, t.z).normalized * 1f / tm;
 
