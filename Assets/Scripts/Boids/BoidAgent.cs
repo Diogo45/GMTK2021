@@ -20,7 +20,7 @@ public class BoidAgent : MonoBehaviour
     public int neighVis; 
 
     //obstacle list
-    public List<Collider> obstacles;
+    public HashSet<Collider> obstacles;
 
     public SphereCollider Radius_collider;
     public Rigidbody rb { get; private set; }
@@ -34,7 +34,7 @@ public class BoidAgent : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         neighbours = new HashSet<BoidAgent>();
-        
+        obstacles = new HashSet<Collider>();
 
         Id = Guid.NewGuid().GetHashCode();
 
@@ -44,6 +44,11 @@ public class BoidAgent : MonoBehaviour
         //    neighbours.Add(neigh.GetComponent<BoidAgent>());
 
         //rb.velocity = Vector3.forward;
+    }
+
+    protected void Update()
+    {
+        Radius_collider.radius = boid_params.LOS;
     }
 
     // Update is called once per frame
@@ -159,6 +164,8 @@ public class BoidAgent : MonoBehaviour
         behind = behind.normalized;
 
         behind *= boid_params.DistanceBehindLeader;
+
+        
 
         return new Vector2(tv.x, tv.z) - new Vector2(behind.x, behind.z);
 

@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 3228053665050835107}
   - component: {fileID: 6439691026699505350}
   - component: {fileID: 1809681655}
+  - component: {fileID: 1201804497}
+  - component: {fileID: 2046348493}
   m_Layer: 0
   m_Name: Boiiii
   m_TagString: Boid
@@ -95,7 +97,7 @@ Rigidbody:
   m_GameObject: {fileID: 3228053665050835104}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 0.05
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -133,6 +135,34 @@ SphereCollider:
   m_Radius: 6
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &1809681655
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3228053665050835104}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &1201804497
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3228053665050835104}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &2046348493
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
