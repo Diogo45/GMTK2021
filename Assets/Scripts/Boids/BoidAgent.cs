@@ -26,7 +26,7 @@ public class BoidAgent : MonoBehaviour
     public float vMax;
 
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
         rb = GetComponent<Rigidbody>();
         neighbours = new List<BoidAgent>();
@@ -40,7 +40,7 @@ public class BoidAgent : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    protected void FixedUpdate()
     {
         BoidMove(Time.fixedDeltaTime);
     }
@@ -71,11 +71,12 @@ public class BoidAgent : MonoBehaviour
         
         Vector2 separation = CalculateSeparation();
         Vector2 cohesion_displacement = CalculateDisplacement();
-        //Vector2 cohesion_displacement = Vector2.zero;
         Vector2 alignment = CalculateAlignment();
-        Vector2 obst = AvoidObstacles();
 
-        Vector2 velocity = separation * boid_params.separations + cohesion_displacement * boid_params.cohesion + alignment * boid_params.alignment + obst * boid_params.obstacles;
+        Vector2 follow = boid_params.Leader ? FollowLeader() : Vector2.zero;
+        //Vector2 obst = AvoidObstacles();
+
+        Vector2 velocity = separation * boid_params.separations + cohesion_displacement * boid_params.cohesion + alignment * boid_params.alignment + follow /*+ obst * boid_params.obstacles*/;
 
         var v = new Vector3(velocity.x, 0f, velocity.y);
 
@@ -85,6 +86,7 @@ public class BoidAgent : MonoBehaviour
         }
 
         rb.velocity =  rb.velocity + v * rate;
+        //rb.AddForce(rb.velocity + v/* * rate*/);
 
 
     }
@@ -99,7 +101,7 @@ public class BoidAgent : MonoBehaviour
 
             var tm = t.magnitude;
 
-          
+            
 
             s += new Vector2(t.x, t.z).normalized * 1f / tm;
 
@@ -117,6 +119,7 @@ public class BoidAgent : MonoBehaviour
         foreach (var neigh in neighbours)
         {
             var t = neigh.rb.position;
+           
             c += new Vector2(t.x, t.z);
         }
         var t2 = rb.position;
@@ -134,6 +137,18 @@ public class BoidAgent : MonoBehaviour
         }
 
         return neighbours.Count != 0 ? (m / neighbours.Count) : Vector2.zero;
+    }
+
+    public virtual Vector2 FollowLeader()
+    {
+        var tv = boid_params.Leader.rb.position - rb.position;
+        var behind = tv * -1f;
+        behind = behind.normalized;
+
+        behind *= boid_params.DistanceBehindLeader;
+
+        return new Vector2(tv.x, tv.z) - new Vector2(behind.x, behind.z);
+
     }
 
     public virtual Vector2 AvoidObstacles()

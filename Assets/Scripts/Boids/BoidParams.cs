@@ -9,5 +9,9 @@ public class BoidParams : MonoBehaviour
     [Range(0, 1f)] public float cohesion;
     [Range(0, 1f)] public float obstacles;
     [Range(0f, 1f)] public float LOS;
+
+    public BoidAgent Leader;
+    [Range(0f, 1f)] public float DistanceBehindLeader;
+
     public BoidTeam team;
 }
