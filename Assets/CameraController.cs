@@ -38,10 +38,10 @@ public class CameraController : MonoBehaviour
         var orthosizeNew = new Vector2(cam.orthographicSize + (scroll * _zoomSpeed), 0f);
 
 
-        cam.orthographicSize = Vector2.SmoothDamp(orthosize, orthosizeNew, ref velocity, 0.3f).x;
+        cam.orthographicSize = Mathf.Clamp(Vector2.SmoothDamp(orthosize, orthosizeNew, ref velocity, 0.3f).x, _zoomMinMax.x, _zoomMinMax.y);
 
 
-
+        
         
 
 

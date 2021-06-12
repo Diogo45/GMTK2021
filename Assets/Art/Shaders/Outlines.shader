@@ -74,7 +74,7 @@ Shader "Unlit/Outline"
 
 
 
-                    if (max(depth_dx, depth_dy) > _T.x)
+                    if (max(depth_dx, depth_dy) > _T.x / 1000.0f)
                         return _Color;
                     else
                         return col;

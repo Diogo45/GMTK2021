@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Boid
   - Obstacle
+  - Leader
   layers:
   - Default
   - TransparentFX

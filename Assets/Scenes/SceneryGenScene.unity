@@ -530,402 +530,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1487207114
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1487207116}
-  - component: {fileID: 1487207115}
-  m_Layer: 0
-  m_Name: CityGen
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1487207115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1487207114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ed7cfe270c59424b9abb03fea7e7960, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Domain:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1000
-    height: 1000
-  BlockPrefab: {fileID: 2440894575270564843, guid: 5e222e786820de142bb8f2d2213c9c6d, type: 3}
-  CutOffsetMax: 0.311
-  CutOffsetMin: 0.128
-  CutVertPercentage: 0.5
-  MinRectSide: 70
-  MaxCuts: 64
-  RandomCuts: 32
-  CutMode: 2
-  road_size_aspas: 0.95
-  HousePrefabs:
-  - {fileID: 6238852133298210463, guid: bc78ebb61a5cb3a46a704c115b202d7c, type: 3}
-  - {fileID: 7715614697306983690, guid: db820d2b4341ccc45b64f9dc87a11a17, type: 3}
-  - {fileID: 1665312347885160138, guid: 410e1313ab1e0a944bbaccf787e9e893, type: 3}
-  - {fileID: 2215213513924187736, guid: 1f3381c5d3dd45046bc876cb540af87a, type: 3}
-  - {fileID: 6745953369709449380, guid: 8eabfbcaec174164c9aa09e0ccd5ff0a, type: 3}
-  - {fileID: 1706187371513368307, guid: 69ed08966647b9844a6f376cb1d2705c, type: 3}
-  - {fileID: 8867450884196518359, guid: 76449637945c78e498c6d34a22932e1f, type: 3}
-  HouseWidth: 10
-  MainRoadWidth: 30
-  InnerRoadWidth: 20
-  HouseOccupationPercent: 0.75
-  CurrentBlocks:
-  - serializedVersion: 2
-    x: 186.87901
-    y: 0
-    width: 158.38731
-    height: 273.1053
-  - serializedVersion: 2
-    x: 0
-    y: 273.1053
-    width: 233.1763
-    height: 245.03351
-  - serializedVersion: 2
-    x: 485.15356
-    y: 344.84665
-    width: 133.88116
-    height: 173.29214
-  - serializedVersion: 2
-    x: 619.0347
-    y: 0
-    width: 256.48022
-    height: 181.045
-  - serializedVersion: 2
-    x: 619.0347
-    y: 181.045
-    width: 256.48022
-    height: 89.780624
-  - serializedVersion: 2
-    x: 619.0347
-    y: 428.57822
-    width: 223.85065
-    height: 89.56058
-  - serializedVersion: 2
-    x: 842.8854
-    y: 270.82562
-    width: 157.11462
-    height: 149.29639
-  - serializedVersion: 2
-    x: 842.8854
-    y: 420.122
-    width: 157.11462
-    height: 98.016785
-  - serializedVersion: 2
-    x: 213.53952
-    y: 518.1388
-    width: 150.85791
-    height: 302.72687
-  - serializedVersion: 2
-    x: 0
-    y: 820.86566
-    width: 247.71143
-    height: 179.13434
-  - serializedVersion: 2
-    x: 364.39743
-    y: 518.1388
-    width: 167.5961
-    height: 241.43298
-  - serializedVersion: 2
-    x: 531.9935
-    y: 518.1388
-    width: 101.97125
-    height: 241.43298
-  - serializedVersion: 2
-    x: 364.39743
-    y: 759.5718
-    width: 153.40024
-    height: 240.42822
-  - serializedVersion: 2
-    x: 849.15283
-    y: 518.1388
-    width: 150.84717
-    height: 204.29846
-  - serializedVersion: 2
-    x: 849.15283
-    y: 722.43726
-    width: 150.84717
-    height: 112.57379
-  - serializedVersion: 2
-    x: 768.34393
-    y: 835.01105
-    width: 91.44885
-    height: 164.98895
-  - serializedVersion: 2
-    x: 859.7928
-    y: 835.01105
-    width: 140.20721
-    height: 110.14844
-  - serializedVersion: 2
-    x: 0
-    y: 0
-    width: 186.87901
-    height: 150.70094
-  - serializedVersion: 2
-    x: 633.9648
-    y: 681.1747
-    width: 140.1883
-    height: 153.83636
-  - serializedVersion: 2
-    x: 774.1531
-    y: 681.1747
-    width: 74.999756
-    height: 153.83636
-  - serializedVersion: 2
-    x: 952.0678
-    y: 156.08772
-    width: 47.93219
-    height: 114.7379
-  - serializedVersion: 2
-    x: 619.0347
-    y: 270.82562
-    width: 148.52759
-    height: 157.7526
-  - serializedVersion: 2
-    x: 767.5623
-    y: 270.82562
-    width: 75.32306
-    height: 157.7526
-  - serializedVersion: 2
-    x: 0
-    y: 680.4617
-    width: 213.53952
-    height: 140.40399
-  - serializedVersion: 2
-    x: 934.1087
-    y: 945.1595
-    width: 65.8913
-    height: 54.840515
-  - serializedVersion: 2
-    x: 517.79767
-    y: 759.5718
-    width: 116.167114
-    height: 155.61469
-  - serializedVersion: 2
-    x: 345.26633
-    y: 344.84665
-    width: 139.88724
-    height: 107.34601
-  - serializedVersion: 2
-    x: 345.26633
-    y: 452.19266
-    width: 139.88724
-    height: 65.94614
-  - serializedVersion: 2
-    x: 496.65216
-    y: 209.35909
-    width: 122.38257
-    height: 135.48756
-  - serializedVersion: 2
-    x: 108.127
-    y: 150.70094
-    width: 78.752014
-    height: 122.40434
-  - serializedVersion: 2
-    x: 233.1763
-    y: 273.1053
-    width: 112.09003
-    height: 143.13736
-  - serializedVersion: 2
-    x: 233.1763
-    y: 416.24265
-    width: 112.09003
-    height: 101.89615
-  - serializedVersion: 2
-    x: 633.9648
-    y: 835.01105
-    width: 134.37915
-    height: 95.43506
-  - serializedVersion: 2
-    x: 633.9648
-    y: 930.4461
-    width: 134.37915
-    height: 69.553894
-  - serializedVersion: 2
-    x: 517.79767
-    y: 915.18646
-    width: 58.41461
-    height: 84.81354
-  - serializedVersion: 2
-    x: 422.5829
-    y: 209.35909
-    width: 74.069275
-    height: 135.48756
-  - serializedVersion: 2
-    x: 247.71143
-    y: 924.0276
-    width: 116.686005
-    height: 75.97241
-  - serializedVersion: 2
-    x: 576.2123
-    y: 915.18646
-    width: 57.752502
-    height: 45.14502
-  - serializedVersion: 2
-    x: 0
-    y: 231.84421
-    width: 108.127
-    height: 41.261078
-  - serializedVersion: 2
-    x: 875.51495
-    y: 156.08772
-    width: 76.55286
-    height: 65.81474
-  - serializedVersion: 2
-    x: 875.51495
-    y: 221.90247
-    width: 76.55286
-    height: 48.923157
-  - serializedVersion: 2
-    x: 633.9648
-    y: 518.1388
-    width: 112.462524
-    height: 163.03589
-  - serializedVersion: 2
-    x: 345.26633
-    y: 0
-    width: 163.7136
-    height: 209.35909
-  - serializedVersion: 2
-    x: 508.97992
-    y: 0
-    width: 110.05481
-    height: 134.80447
-  - serializedVersion: 2
-    x: 508.97992
-    y: 134.80447
-    width: 110.05481
-    height: 74.55461
-  - serializedVersion: 2
-    x: 875.51495
-    y: 104.65387
-    width: 75.98956
-    height: 51.433853
-  - serializedVersion: 2
-    x: 951.5045
-    y: 104.65387
-    width: 48.495483
-    height: 51.433853
-  - serializedVersion: 2
-    x: 576.2123
-    y: 960.3315
-    width: 29.025208
-    height: 39.668518
-  - serializedVersion: 2
-    x: 605.2375
-    y: 960.3315
-    width: 28.727295
-    height: 39.668518
-  - serializedVersion: 2
-    x: 319.97464
-    y: 820.86566
-    width: 44.42279
-    height: 103.16193
-  - serializedVersion: 2
-    x: 247.71143
-    y: 820.86566
-    width: 72.263214
-    height: 69.62311
-  - serializedVersion: 2
-    x: 247.71143
-    y: 890.4888
-    width: 72.263214
-    height: 33.53882
-  - serializedVersion: 2
-    x: 875.51495
-    y: 0
-    width: 80.14624
-    height: 104.65387
-  - serializedVersion: 2
-    x: 955.6612
-    y: 0
-    width: 44.338806
-    height: 104.65387
-  - serializedVersion: 2
-    x: 0
-    y: 150.70094
-    width: 68.09535
-    height: 81.143265
-  - serializedVersion: 2
-    x: 68.09535
-    y: 150.70094
-    width: 40.031647
-    height: 81.143265
-  - serializedVersion: 2
-    x: 859.7928
-    y: 945.1595
-    width: 38.62097
-    height: 54.840515
-  - serializedVersion: 2
-    x: 898.41376
-    y: 945.1595
-    width: 35.694946
-    height: 27.581055
-  - serializedVersion: 2
-    x: 898.41376
-    y: 972.74054
-    width: 35.694946
-    height: 27.25946
-  - serializedVersion: 2
-    x: 746.4273
-    y: 518.1388
-    width: 102.725525
-    height: 109.57617
-  - serializedVersion: 2
-    x: 746.4273
-    y: 627.71497
-    width: 102.725525
-    height: 53.459717
-  - serializedVersion: 2
-    x: 0
-    y: 518.1388
-    width: 129.70607
-    height: 162.32288
-  - serializedVersion: 2
-    x: 129.70607
-    y: 518.1388
-    width: 83.83345
-    height: 162.32288
-  - serializedVersion: 2
-    x: 345.26633
-    y: 209.35909
-    width: 77.31656
-    height: 85.62309
-  - serializedVersion: 2
-    x: 345.26633
-    y: 294.98218
-    width: 77.31656
-    height: 49.86447
---- !u!4 &1487207116
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1487207114}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1610597986
 GameObject:
   m_ObjectHideFlags: 0
@@ -1021,3 +625,60 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1840441682257654290
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1840441680775268568, guid: a687a847edba1054283ac9c8091b99d3, type: 3}
+      propertyPath: m_Name
+      value: CityGen
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840441680775268574, guid: a687a847edba1054283ac9c8091b99d3, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840441680775268574, guid: a687a847edba1054283ac9c8091b99d3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840441680775268574, guid: a687a847edba1054283ac9c8091b99d3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840441680775268574, guid: a687a847edba1054283ac9c8091b99d3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840441680775268574, guid: a687a847edba1054283ac9c8091b99d3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840441680775268574, guid: a687a847edba1054283ac9c8091b99d3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840441680775268574, guid: a687a847edba1054283ac9c8091b99d3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840441680775268574, guid: a687a847edba1054283ac9c8091b99d3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840441680775268574, guid: a687a847edba1054283ac9c8091b99d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840441680775268574, guid: a687a847edba1054283ac9c8091b99d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840441680775268574, guid: a687a847edba1054283ac9c8091b99d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a687a847edba1054283ac9c8091b99d3, type: 3}

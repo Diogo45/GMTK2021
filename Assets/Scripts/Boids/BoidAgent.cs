@@ -61,6 +61,15 @@ public class BoidAgent : MonoBehaviour
     // detected another boid entering neighbour radius
     private void OnTriggerEnter(Collider other)
     {
+
+        if (other.CompareTag("Leader"))
+        {
+            if (!boid_params.Leader)
+            {
+                boid_params = other.GetComponent<BoidLeader>().boid_params;
+            }
+        }
+
         if (other.CompareTag("Boid"))
         {
             var boid = other.GetComponent<BoidAgent>();
@@ -92,9 +101,9 @@ public class BoidAgent : MonoBehaviour
         Vector2 alignment = CalculateAlignment() * boid_params.alignment;
 
         Vector2 follow = boid_params.Leader ? FollowLeader() * boid_params.FollowLeader : Vector2.zero;
-        //Vector2 obst = AvoidObstacles();
+        Vector2 obst = AvoidObstacles();
 
-        Vector2 velocity = separation + cohesion_displacement + alignment + follow /*+ obst * boid_params.obstacles*/;
+        Vector2 velocity = separation + cohesion_displacement + alignment + follow /*+ obst * (boid_params.obstacles + follow.magnitude)*/;
 
         var v = new Vector3(velocity.x, 0f, velocity.y);
 
@@ -182,7 +191,7 @@ public class BoidAgent : MonoBehaviour
 
             var tm = t.magnitude;
 
-            s += new Vector2(t.x, t.z).normalized * 1f / tm;
+            s += new Vector2(t.x, t.z)/*.normalized * 1f / tm*/;
         }
 
         //var x = s.x > 0 ? 1 / s.x : 0f;
