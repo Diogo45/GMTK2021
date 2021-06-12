@@ -27,7 +27,13 @@ public class BoidAgent : MonoBehaviour
 
     public float vMax;
 
-    public int Id { get; private set; }
+    public BoidLeader Leader;
+
+    private const float _lostLeaderTimerValue = 15f;
+
+    private float _lostLeaderTimer = _lostLeaderTimerValue;
+    private bool _isLeaderLost = false;
+
 
     // Start is called before the first frame update
     protected void Start()
@@ -36,19 +42,28 @@ public class BoidAgent : MonoBehaviour
         neighbours = new HashSet<BoidAgent>();
         obstacles = new HashSet<Collider>();
 
-        Id = Guid.NewGuid().GetHashCode();
 
-        //var blah = Physics.OverlapSphere(rb.position, Radius_collider.radius, LayerMask.GetMask("Boid"));
-
-        //foreach (var neigh in blah)
-        //    neighbours.Add(neigh.GetComponent<BoidAgent>());
-
-        //rb.velocity = Vector3.forward;
     }
 
     protected void Update()
     {
         Radius_collider.radius = boid_params.LOS;
+
+        if (_isLeaderLost)
+        {
+            _lostLeaderTimer -= Time.deltaTime;
+
+            if (_lostLeaderTimer <= 0f)
+            {
+                _lostLeaderTimer = _lostLeaderTimerValue;
+                _isLeaderLost = false;
+
+                Leader = null;
+
+            }
+        }
+
+
     }
 
     // Update is called once per frame
@@ -64,15 +79,25 @@ public class BoidAgent : MonoBehaviour
 
         if (other.CompareTag("Leader"))
         {
-            if (!boid_params.Leader)
+            if (!Leader)
             {
-                boid_params = other.GetComponent<BoidLeader>().boid_params;
+                var boid = other.GetComponent<BoidAgent>();
+
+                if (boid.boid_params.team != boid_params.team)
+                    return;
+
+                _isLeaderLost = false;
+                _lostLeaderTimer = _lostLeaderTimerValue;
+
+                Leader = other.GetComponent<BoidLeader>();
             }
         }
 
         if (other.CompareTag("Boid"))
         {
             var boid = other.GetComponent<BoidAgent>();
+            if (boid.boid_params.team != boid_params.team)
+                return;
             if (neighbours.Count < 100)
                 neighbours.Add(boid);
             
@@ -85,12 +110,38 @@ public class BoidAgent : MonoBehaviour
     // detected another boid leaving neighbour radius
     private void OnTriggerExit(Collider other)
     {
+        if (other.CompareTag("Leader"))
+        {
+            if (Leader)
+            {
+                var boid = other.GetComponent<BoidAgent>();
+
+                if (boid.boid_params.team != boid_params.team)
+                    return;
+
+                _isLeaderLost = true;
+                _lostLeaderTimer = _lostLeaderTimerValue;
+
+                //boid_params = other.GetComponent<BoidLeader>().boid_params;
+            }
+        }
+
+
         if (other.CompareTag("Boid"))
-            neighbours.Remove(other.GetComponent<BoidAgent>());
+        {
+            var boid = other.GetComponent<BoidAgent>();
+
+            if (boid.boid_params.team != boid_params.team)
+                return;
+
+            neighbours.Remove(boid);
+        }
 
         if (other.CompareTag("Obstacle"))
             obstacles.Remove(other);
     }
+
+  
 
 
     public virtual void BoidMove(float rate)
@@ -100,7 +151,7 @@ public class BoidAgent : MonoBehaviour
         Vector2 cohesion_displacement = CalculateDisplacement() * boid_params.cohesion;
         Vector2 alignment = CalculateAlignment() * boid_params.alignment;
 
-        Vector2 follow = boid_params.Leader ? FollowLeader() * boid_params.FollowLeader : Vector2.zero;
+        Vector2 follow = Leader ? FollowLeader() * boid_params.FollowLeader : Vector2.zero;
         Vector2 obst = AvoidObstacles();
 
         Vector2 velocity = separation + cohesion_displacement + alignment + follow /*+ obst * (boid_params.obstacles + follow.magnitude)*/;
@@ -168,7 +219,7 @@ public class BoidAgent : MonoBehaviour
 
     public virtual Vector2 FollowLeader()
     {
-        var tv = boid_params.Leader.rb.position - rb.position;
+        var tv = Leader.rb.position - rb.position;
         var behind = tv * -1f;
         behind = behind.normalized;
 

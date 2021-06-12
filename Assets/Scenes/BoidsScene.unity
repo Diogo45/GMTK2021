@@ -20856,7 +20856,6 @@ MonoBehaviour:
   cohesion: 0.859
   obstacles: 0
   LOS: 6
-  Leader: {fileID: 0}
   FollowLeader: 0
   DistanceBehindLeader: 0
   team: 0
@@ -34620,7 +34619,7 @@ TerrainCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1754690052}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ea0a5f415685056449c4b5204d9d3d1c, type: 2}
   m_Enabled: 1
   m_TerrainData: {fileID: 15600000, guid: 297f7407cce5225428854bb53ac6609c, type: 2}
   m_EnableTreeColliders: 1
@@ -40984,6 +40983,7 @@ MonoBehaviour:
   neighVis: 0
   Radius_collider: {fileID: 2081725723}
   vMax: 25
+  Leader: {fileID: 0}
   <velocity>k__BackingField: {x: 0, y: 0}
 --- !u!54 &2081725728
 Rigidbody:
