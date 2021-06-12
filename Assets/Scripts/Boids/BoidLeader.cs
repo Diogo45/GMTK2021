@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoidFollow : BoidAgent
+public class BoidLeader : BoidAgent
 {
     // Start is called before the first frame update
     void Start()
