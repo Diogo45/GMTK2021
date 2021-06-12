@@ -48,8 +48,8 @@ Shader "Custom/CartoonOutlinedShader"
 				Tags {
 					"LightMode" = "ForwardBase"
 					"PassFlags" = "OnlyDirectional"
-					"RenderType" = "Transparent"
-					"Queue" = "Transparent"
+					"RenderType" = "Opaque"
+					"Queue" = "Opaque"
 				}
 
 				LOD 100
@@ -243,97 +243,7 @@ Shader "Custom/CartoonOutlinedShader"
 				ENDCG
 			}
 
-			Pass
-			{
-					//Only render the backside of objects
-					Cull Front
-					Name "Outline"
-					Blend SrcAlpha OneMinusSrcAlpha
-
-					CGPROGRAM
-					#pragma vertex vert
-					#pragma fragment frag
-					// make fog work
-					#pragma multi_compile_fog
-					#pragma multi_compile_fwdbase
-
-					#include "UnityCG.cginc"
-
-					struct appdata
-					{
-						float4 vertex : POSITION;
-						float3 normal : NORMAL;
-
-					};
-
-					struct v2f
-					{
-						float4 pos : SV_POSITION;
-
-						float4 screenPos : TEXCOORD0;
-						float4 worldPos : TEXCOORD1;
-
-						float4 targetScreenPos : TEXCOORD2;
-					};
-
-
-					float4 _Color;
-					float4 _OutlineColor;
-					float _OutlineWidth;
-
-					float3 _TargetPosition;
-					float _OcclusionRadius;
-
-					float4 _OcclusionBackPlaneOffsets;
-					float _OcclusionScale;
-
-					float _MinAlpha;
-
-					v2f vert(appdata v)
-					{
-						v2f o;
-
-
-						float3 normal = normalize(mul((float3x3)UNITY_MATRIX_IT_MV, v.normal));
-						float3 offset = TransformViewToProjection(v.normal.xyz) * _OutlineWidth;
-
-
-						float3 pos = v.vertex;
-
-						//Old Way
-						/*float3 normal = normalize(v.normal);
-						float3 offset = v.normal * _OutlineWidth;
-
-
-						float3 pos = v.vertex + offset;
-
-						o.pos = UnityObjectToClipPos(pos) + float4(offset,0);
-						*/
-
-						o.pos = UnityObjectToClipPos(pos);
-
-						o.pos.xyz += offset;
-
-						o.screenPos = ComputeScreenPos(o.pos);
-						o.worldPos = mul(unity_ObjectToWorld, o.pos);
-
-						//Computes the screen space of the target's world position
-						o.targetScreenPos = ComputeScreenPos(UnityObjectToClipPos(mul(unity_WorldToObject, float4(_TargetPosition, 1))));
-
-
-						return o;
-					}
-
-					fixed4 frag(v2f i) : SV_Target
-					{
-						float center_ofscreen = distance(float2(i.screenPos.xy), i.targetScreenPos.xy);
-
-						float alpha = smoothstep(_OcclusionScale, _OcclusionRadius, center_ofscreen);
-
-						return fixed4(_OutlineColor.xyz, max(alpha, _MinAlpha));
-					}
-				ENDCG
-				}
+			
 
 				UsePass "Legacy Shaders/VertexLit/SHADOWCASTER"
 			}

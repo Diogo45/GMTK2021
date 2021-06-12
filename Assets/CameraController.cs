@@ -37,12 +37,13 @@ public class CameraController : MonoBehaviour
         var orthosize = new Vector2(cam.orthographicSize, 0f);
         var orthosizeNew = new Vector2(cam.orthographicSize + (scroll * _zoomSpeed), 0f);
 
+        var new_size = Mathf.Clamp(Vector2.SmoothDamp(orthosize, orthosizeNew, ref velocity, 0.3f).x, _zoomMinMax.x, _zoomMinMax.y);
+        cam.orthographicSize = new_size;
 
-        cam.orthographicSize = Mathf.Clamp(Vector2.SmoothDamp(orthosize, orthosizeNew, ref velocity, 0.3f).x, _zoomMinMax.x, _zoomMinMax.y);
+        var new_size_t = Mathf.Lerp(0.00015f, 0.0004f, (new_size - _zoomMinMax.x) / (_zoomMinMax.y - _zoomMinMax.x));
 
+        Shader.SetGlobalFloat("_CameraZoomT", new_size_t);
 
-        
-        
 
 
 
