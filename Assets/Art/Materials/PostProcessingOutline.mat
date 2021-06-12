@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PostProcessingOutline
-  m_Shader: {fileID: 4800000, guid: 2a7dd492e9c558747a8386e80ed4e0c6, type: 3}
+  m_Shader: {fileID: 4800000, guid: dc99c6c83e97f8043a978b5ccd327e7e, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -112,6 +112,6 @@ Material:
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _SmoothStepRanges: {r: 0, g: 1, b: 0, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
-    - _T: {r: 0.005, g: 1.11, b: 0, a: 1}
+    - _T: {r: 0.99, g: 0.001, b: 0, a: 1}
     - _TargetPosition: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
