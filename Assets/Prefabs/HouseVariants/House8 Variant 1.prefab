@@ -10,14 +10,14 @@ PrefabInstance:
     - target: {fileID: 5590135394135058250, guid: bc78ebb61a5cb3a46a704c115b202d7c, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 8457432598939410078, guid: 895cbfa704aca304aae73beed6b3e4fb, type: 3}
+      objectReference: {fileID: 2100000, guid: 1da5bd4beafd08d4991bd548fd3150d7, type: 2}
     - target: {fileID: 5590135394135058250, guid: bc78ebb61a5cb3a46a704c115b202d7c, type: 3}
       propertyPath: m_Materials.Array.data[4]
       value: 
-      objectReference: {fileID: 1550975326256456482, guid: 48a784f4d13184a498766d0c475dec97, type: 3}
+      objectReference: {fileID: 2100000, guid: 1da5bd4beafd08d4991bd548fd3150d7, type: 2}
     - target: {fileID: 6238852133298210463, guid: bc78ebb61a5cb3a46a704c115b202d7c, type: 3}
       propertyPath: m_Name
-      value: House8
+      value: House8 Variant 1
       objectReference: {fileID: 0}
     - target: {fileID: 6764136543807200293, guid: bc78ebb61a5cb3a46a704c115b202d7c, type: 3}
       propertyPath: m_RootOrder
