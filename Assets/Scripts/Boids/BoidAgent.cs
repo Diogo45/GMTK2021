@@ -16,8 +16,12 @@ public enum BoidTeam
 public class BoidAgent : MonoBehaviour
 {
     public BoidParams boid_params;
-    public HashSet<BoidAgent> neighbours;
-    public int neighVis; 
+
+    public HashSet<BoidAgent> TeamNeighboors;
+    public HashSet<BoidAgent> EnemyNeighboors;
+
+    public int neighVis;
+    public int EnemyNeighVis;
 
     //obstacle list
     public HashSet<Collider> obstacles;
@@ -29,7 +33,8 @@ public class BoidAgent : MonoBehaviour
 
     public BoidLeader Leader;
 
-    private const float _lostLeaderTimerValue = 15f;
+    private const float _lostLeaderTimerValue = 1f;
+    private const float _lostLeaderBuffer = 10f;
 
     private float _lostLeaderTimer = _lostLeaderTimerValue;
     private bool _isLeaderLost = false;
@@ -39,7 +44,8 @@ public class BoidAgent : MonoBehaviour
     protected void Start()
     {
         rb = GetComponent<Rigidbody>();
-        neighbours = new HashSet<BoidAgent>();
+        TeamNeighboors = new HashSet<BoidAgent>();
+        EnemyNeighboors = new HashSet<BoidAgent>();
         obstacles = new HashSet<Collider>();
 
 
@@ -48,28 +54,62 @@ public class BoidAgent : MonoBehaviour
     protected void Update()
     {
         Radius_collider.radius = boid_params.LOS;
+        EnemyNeighVis = EnemyNeighboors.Count;
+        neighVis = TeamNeighboors.Count;
 
+        if (Leader)
+        {
+            IsLeaderLost();
+
+            HandleLeaderLost();
+        }
+
+    }
+
+    private void IsLeaderLost()
+    {
+        //if (!Leader) return;
+
+        if (EnemyNeighboors.Count > TeamNeighboors.Count)
+        {
+            _isLeaderLost = true;
+            //_lostLeaderTimer = _lostLeaderTimerValue;
+        }
+        else
+        {
+            _isLeaderLost = false;
+            _lostLeaderTimer = _lostLeaderTimerValue;
+        }
+
+    }
+    private void HandleLeaderLost()
+    {
         if (_isLeaderLost)
         {
             _lostLeaderTimer -= Time.deltaTime;
 
             if (_lostLeaderTimer <= 0f)
             {
-                _lostLeaderTimer = _lostLeaderTimerValue;
-                _isLeaderLost = false;
-
+                StartCoroutine(ResetLeaderLost());
                 Leader = null;
 
             }
         }
+    }
 
+    private IEnumerator ResetLeaderLost()
+    {
+        yield return new WaitForSeconds(_lostLeaderBuffer);
+
+        _lostLeaderTimer = _lostLeaderTimerValue;
+        _isLeaderLost = false;
 
     }
 
     // Update is called once per frame
     protected void FixedUpdate()
     {
-        neighVis = neighbours.Count;
+
         BoidMove(Time.fixedDeltaTime);
     }
 
@@ -86,10 +126,10 @@ public class BoidAgent : MonoBehaviour
                 if (boid.boid_params.team != boid_params.team)
                     return;
 
-                _isLeaderLost = false;
-                _lostLeaderTimer = _lostLeaderTimerValue;
-
-                Leader = other.GetComponent<BoidLeader>();
+                //_isLeaderLost = false;
+                //_lostLeaderTimer = _lostLeaderTimerValue;
+                if (!_isLeaderLost)
+                    Leader = other.GetComponent<BoidLeader>();
             }
         }
 
@@ -97,10 +137,14 @@ public class BoidAgent : MonoBehaviour
         {
             var boid = other.GetComponent<BoidAgent>();
             if (boid.boid_params.team != boid_params.team)
-                return;
-            if (neighbours.Count < 100)
-                neighbours.Add(boid);
-            
+            {
+                EnemyNeighboors.Add(boid);
+            }
+            else
+            {
+                if (TeamNeighboors.Count < 100)
+                    TeamNeighboors.Add(boid);
+            }
         }
 
         if (other.CompareTag("Obstacle"))
@@ -110,21 +154,6 @@ public class BoidAgent : MonoBehaviour
     // detected another boid leaving neighbour radius
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Leader"))
-        {
-            if (Leader)
-            {
-                var boid = other.GetComponent<BoidAgent>();
-
-                if (boid.boid_params.team != boid_params.team)
-                    return;
-
-                _isLeaderLost = true;
-                _lostLeaderTimer = _lostLeaderTimerValue;
-
-                //boid_params = other.GetComponent<BoidLeader>().boid_params;
-            }
-        }
 
 
         if (other.CompareTag("Boid"))
@@ -132,16 +161,18 @@ public class BoidAgent : MonoBehaviour
             var boid = other.GetComponent<BoidAgent>();
 
             if (boid.boid_params.team != boid_params.team)
-                return;
-
-            neighbours.Remove(boid);
+            {
+                EnemyNeighboors.Remove(boid);
+            }
+            else
+                TeamNeighboors.Remove(boid);
         }
 
         if (other.CompareTag("Obstacle"))
             obstacles.Remove(other);
     }
 
-  
+
 
 
     public virtual void BoidMove(float rate)
@@ -154,7 +185,10 @@ public class BoidAgent : MonoBehaviour
         Vector2 follow = Leader ? FollowLeader() * boid_params.FollowLeader : Vector2.zero;
         Vector2 obst = AvoidObstacles();
 
-        Vector2 velocity = separation + cohesion_displacement + alignment + follow /*+ obst * (boid_params.obstacles + follow.magnitude)*/;
+        Vector2 others = boid_params.team == BoidTeam.ForChangeRiot ? CalculateSeparationOtherTeams() : Vector2.zero;
+
+
+        Vector2 velocity = separation + cohesion_displacement + alignment + follow + (others * 25f) /*+ obst * (boid_params.obstacles + follow.magnitude)*/;
 
         var v = new Vector3(velocity.x, 0f, velocity.y);
 
@@ -173,13 +207,11 @@ public class BoidAgent : MonoBehaviour
     {
         Vector2 s = Vector2.zero;
 
-        foreach (var neigh in neighbours)
+        foreach (var neigh in TeamNeighboors)
         {
             var t = rb.position - neigh.rb.position;
 
             var tm = t.magnitude;
-
-
 
             s += new Vector2(t.x, t.z).normalized * 1f / tm;
 
@@ -189,32 +221,53 @@ public class BoidAgent : MonoBehaviour
         return s;
     }
 
+
+    public virtual Vector2 CalculateSeparationOtherTeams()
+    {
+        Vector2 s = Vector2.zero;
+
+        foreach (var neigh in EnemyNeighboors)
+        {
+            var t = rb.position - neigh.rb.position;
+
+            var tm = t.magnitude;
+
+            s += new Vector2(t.x, t.z).normalized * 1f / tm;
+
+            //s -= new Vector2(t.x, t.z);
+        }
+
+        return s;
+    }
+
+
+
     public virtual Vector2 CalculateDisplacement()
     {
 
         Vector2 c = Vector2.zero;
 
-        foreach (var neigh in neighbours)
+        foreach (var neigh in TeamNeighboors)
         {
             var t = neigh.rb.position;
 
             c += new Vector2(t.x, t.z);
         }
         var t2 = rb.position;
-        return neighbours.Count != 0 ? ((c / neighbours.Count) - new Vector2(t2.x, t2.z)) : Vector2.zero;
+        return TeamNeighboors.Count != 0 ? ((c / TeamNeighboors.Count) - new Vector2(t2.x, t2.z)) : Vector2.zero;
     }
 
     public virtual Vector2 CalculateAlignment()
     {
         var m = Vector2.zero;
 
-        foreach (var neigh in neighbours)
+        foreach (var neigh in TeamNeighboors)
         {
             var t = new Vector2(neigh.rb.velocity.x, neigh.rb.velocity.z);
             m += t;
         }
 
-        return neighbours.Count != 0 ? (m / neighbours.Count) : Vector2.zero;
+        return TeamNeighboors.Count != 0 ? (m / TeamNeighboors.Count) : Vector2.zero;
     }
 
     public virtual Vector2 FollowLeader()
@@ -225,7 +278,7 @@ public class BoidAgent : MonoBehaviour
 
         behind *= boid_params.DistanceBehindLeader;
 
-        
+
 
         return new Vector2(tv.x, tv.z) - new Vector2(behind.x, behind.z);
 
