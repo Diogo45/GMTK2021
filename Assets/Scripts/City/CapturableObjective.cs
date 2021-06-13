@@ -11,8 +11,8 @@ public class CapturableObjective : MonoBehaviour
     public delegate void OnChargeChange(float charge);
     public delegate void OnChargeMaxed(CapturableObjective obj);
 
-    public event OnChargeChange ChargeChanged;
-    public event OnChargeMaxed ChargeMaxed;
+    public static event OnChargeChange ChargeChanged;
+    public static event OnChargeMaxed ChargeMaxed;
 
     public bool Captured = false;
     public float CaptureCharge = 0;
@@ -29,6 +29,8 @@ public class CapturableObjective : MonoBehaviour
     private Renderer r;
     private MaterialPropertyBlock _propBlock;
 
+    [SerializeField] private List<Renderer> _renderers;
+
 
     public IEnumerator CheckCharge()
     {
@@ -43,7 +45,7 @@ public class CapturableObjective : MonoBehaviour
     public void Charge() 
     {
         int quantity = neighbours.Count;
-        Debug.Log(quantity);
+        //Debug.Log(quantity);
         float charge = Mathf.Clamp(ChargeRate *  Mathf.Pow(ChargeStrength, ChargePow * quantity) - ChargeRate, 0f, ChargeCap) ;
 
         CaptureCharge += charge * check_timer;
@@ -66,9 +68,15 @@ public class CapturableObjective : MonoBehaviour
 
     public void UpdateMat() 
     {
-        r.GetPropertyBlock(_propBlock);
-        _propBlock.SetFloat("_CapturePercent", Mathf.Clamp01(CaptureCharge / MaxCharge));
-        r.SetPropertyBlock(_propBlock);
+        foreach(Renderer rend in _renderers)
+        {
+            rend.GetPropertyBlock(_propBlock);
+            _propBlock.SetFloat("_CapturePercent", Mathf.Clamp01(CaptureCharge / MaxCharge));
+            rend.SetPropertyBlock(_propBlock);
+        }
+        //r.GetPropertyBlock(_propBlock);
+        //_propBlock.SetFloat("_CapturePercent", Mathf.Clamp01(CaptureCharge / MaxCharge));
+        //r.SetPropertyBlock(_propBlock);
     }
 
     // Start is called before the first frame update
@@ -79,7 +87,7 @@ public class CapturableObjective : MonoBehaviour
 
         StartCoroutine(CheckCharge());
 
-        ChargeMaxed += CapturedTest;
+        //ChargeMaxed += CapturedTest;
     }
 
 
