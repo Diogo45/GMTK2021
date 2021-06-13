@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SimplePoliceController : MonoBehaviour
+public class SimpleMenuController : MonoBehaviour
 {
 
     public BoidLeader PlayerCursor;
-    public BoidLeader PoliceLeader;
+
+    public Rect Bounds;
 
     public float MoveTimer;
     public float MoveSpeed;
 
     public Vector3 Target;
 
-    public IEnumerator MovePolice()
+    public IEnumerator Move()
     {
         while ((transform.position - Target).magnitude > 0.1f)
         {
@@ -23,26 +24,26 @@ public class SimplePoliceController : MonoBehaviour
         }
     }
 
-    public IEnumerator TriggerMovePolice()
+    public IEnumerator TriggerMove()
     {
         while (true)
         {
             yield return new WaitForSeconds(MoveTimer);
             Vector3 v = Vector3.zero;
-            foreach (var n in PlayerCursor.TeamNeighboors)
-                v += n.transform.position;
-            v /= PlayerCursor.TeamNeighboors.Count;
-            v.y = 0.0f;
+
+            v.x = Random.Range(Bounds.xMin, Bounds.xMax);
+            v.z = Random.Range(Bounds.yMin, Bounds.yMax);
+
             Target = v;
 
-            StartCoroutine(MovePolice());
+            StartCoroutine(Move());
         }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(TriggerMovePolice());
+        StartCoroutine(TriggerMove());
     }
 
 }
