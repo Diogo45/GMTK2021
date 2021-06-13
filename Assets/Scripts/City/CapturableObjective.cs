@@ -49,7 +49,7 @@ public class CapturableObjective : MonoBehaviour
 
         if (CaptureCharge >= MaxCharge)
         {
-            //Captured = true;
+            Captured = true;
             ChargeMaxed?.Invoke(this);
         }
 
