@@ -27,6 +27,9 @@ public class CapturableObjective : MonoBehaviour
     public HashSet<GameObject> neighbours = new HashSet<GameObject>();
 
     private Renderer r;
+    private MaterialPropertyBlock _propBlock;
+
+
     public IEnumerator CheckCharge()
     {
         while (!Captured)
@@ -63,24 +66,16 @@ public class CapturableObjective : MonoBehaviour
 
     public void UpdateMat() 
     {
-        foreach(var mat in r.materials)
-        {
-            mat.SetFloat("_CapturePercent", Mathf.Clamp01(CaptureCharge / MaxCharge));
-        }
+        r.GetPropertyBlock(_propBlock);
+        _propBlock.SetFloat("_CapturePercent", Mathf.Clamp01(CaptureCharge / MaxCharge));
+        r.SetPropertyBlock(_propBlock);
     }
 
     // Start is called before the first frame update
     void Start()
     {
         r = GetComponent<Renderer>();
-        r.material = new Material(r.material);
-        CaptureMat = r.material;
-
-        for (int i = 0; i < r.materials.Length; i++)
-        {
-            r.materials[i] = CaptureMat;
-        }
-        
+        _propBlock = new MaterialPropertyBlock();
 
         StartCoroutine(CheckCharge());
 
