@@ -42,7 +42,7 @@ public class CameraController : MonoBehaviour
 
         var new_size_t = Mathf.Lerp(0.00015f, 0.0004f, (new_size - _zoomMinMax.x) / (_zoomMinMax.y - _zoomMinMax.x));
 
-        Shader.SetGlobalFloat("_CameraZoomT", new_size_t);
+        //Shader.SetGlobalFloat("_CameraZoomT", new_size_t);
 
 
 

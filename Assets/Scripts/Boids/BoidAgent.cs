@@ -185,7 +185,7 @@ public class BoidAgent : MonoBehaviour
         Vector2 follow = Leader ? FollowLeader() * boid_params.FollowLeader : Vector2.zero;
         Vector2 obst = AvoidObstacles();
 
-        Vector2 others = boid_params.team == BoidTeam.ForChangeRiot ? CalculateSeparationOtherTeams() : Vector2.zero;
+        Vector2 others = boid_params.team != BoidTeam.Police ? CalculateSeparationOtherTeams() : Vector2.zero;
 
 
         Vector2 velocity = separation + cohesion_displacement + alignment + follow + (others * 25f) /*+ obst * (boid_params.obstacles + follow.magnitude)*/;
@@ -211,6 +211,8 @@ public class BoidAgent : MonoBehaviour
         {
             var t = rb.position - neigh.rb.position;
 
+            t.y = 0f;
+
             var tm = t.magnitude;
 
             s += new Vector2(t.x, t.z).normalized * 1f / tm;
@@ -228,7 +230,10 @@ public class BoidAgent : MonoBehaviour
 
         foreach (var neigh in EnemyNeighboors)
         {
+
             var t = rb.position - neigh.rb.position;
+
+            t.y = 0f;
 
             var tm = t.magnitude;
 
