@@ -19,17 +19,18 @@ public class MouseToPlane : MonoBehaviour
 
     private void Update()
     {
-        Vector3 mousePos = Vector3.zero;
+        if (Input.GetButton("Fire1")) { 
+            Vector3 mousePos = Vector3.zero;
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (p.Raycast(ray, out float distance))
-        {
-            mousePos = ray.GetPoint(distance);
+            if (p.Raycast(ray, out float distance))
+            {
+                mousePos = ray.GetPoint(distance);
+            }
+
+            rb.position = mousePos;
         }
-
-        rb.position = mousePos;
-
     }
 
 

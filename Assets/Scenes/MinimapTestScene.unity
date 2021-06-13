@@ -20352,7 +20352,6 @@ MonoBehaviour:
   cohesion: 0.859
   obstacles: 0
   LOS: 6
-  Leader: {fileID: 0}
   FollowLeader: 0
   DistanceBehindLeader: 0
   team: 0
@@ -27521,6 +27520,7 @@ GameObject:
   - component: {fileID: 1380416157}
   - component: {fileID: 1380416156}
   - component: {fileID: 1380416155}
+  - component: {fileID: 1380416159}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -27598,12 +27598,33 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1380416154}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.23, y: 5.04, z: 170}
+  m_LocalPosition: {x: 132.2, y: 5.04, z: 205.6}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1380416159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380416154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe0db9a5b25b3bd47bb8884f39890139, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CaptureMat: {fileID: 2100000, guid: cfb26dc92a874a24e9c2e066fe4473f9, type: 2}
+  Captured: 0
+  CaptureCharge: 0
+  MaxCharge: 100
+  ChargeStrength: 1.01
+  ChargeCap: 8
+  ChargePow: 1.2
+  ChargeRate: 1.4
+  check_timer: 0.1
 --- !u!1 &1384526905
 GameObject:
   m_ObjectHideFlags: 0
@@ -42355,8 +42376,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boid_params: {fileID: 1517205659}
   neighVis: 0
+  EnemyNeighVis: 0
   Radius_collider: {fileID: 2081725723}
   vMax: 25
+  Leader: {fileID: 0}
   <velocity>k__BackingField: {x: 0, y: 0}
 --- !u!54 &2081725728
 Rigidbody:
@@ -43341,6 +43364,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6402267839735354328, guid: 4e28682042c50d94a9c3467e40bd3e2a, type: 3}
+      propertyPath: team
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6402267839735354328, guid: 4e28682042c50d94a9c3467e40bd3e2a, type: 3}
       propertyPath: Leader
       value: 

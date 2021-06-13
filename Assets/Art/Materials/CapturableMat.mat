@@ -70,7 +70,7 @@ Material:
     m_Floats:
     - _BumpScale: 1
     - _CaptureHeight: 10
-    - _CapturePercent: 0
+    - _CapturePercent: -3.38
     - _CoreShadowWidth: 0.01
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1

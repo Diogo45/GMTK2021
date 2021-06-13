@@ -24,7 +24,7 @@ public class CapturableObjective : MonoBehaviour
     public float ChargeRate = 1.4f;
     public float check_timer = 1.0f;
 
-    public HashSet<GameObject> neighbours;
+    public HashSet<GameObject> neighbours = new HashSet<GameObject>();
 
 
     public IEnumerator CheckCharge()
@@ -40,20 +40,25 @@ public class CapturableObjective : MonoBehaviour
     public void Charge() 
     {
         int quantity = neighbours.Count;
+        Debug.Log(quantity);
+        float charge = Mathf.Clamp(ChargeRate *  Mathf.Pow(ChargeStrength, ChargePow * quantity) - ChargeRate, 0f, ChargeCap) ;
 
-        float charge = Mathf.Clamp(ChargeRate *  Mathf.Pow(ChargeStrength, ChargePow * quantity), 0f, ChargeCap);
+        CaptureCharge += charge * check_timer;
 
-        CaptureCharge += charge;
-
-        ChargeChanged.Invoke(CaptureCharge);
+        ChargeChanged?.Invoke(CaptureCharge);
 
         if (CaptureCharge >= MaxCharge)
         {
-            Captured = true;
-            ChargeMaxed.Invoke(this);
+            //Captured = true;
+            ChargeMaxed?.Invoke(this);
         }
 
         UpdateMat();
+    }
+
+    public void CapturedTest(CapturableObjective obj)
+    {
+        Debug.Log("Captured");
     }
 
     public void UpdateMat() 
@@ -64,25 +69,39 @@ public class CapturableObjective : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CaptureMat = new Material(CaptureMat);
+        var r = GetComponent<Renderer>();
+        r.material = new Material(r.material);
+        CaptureMat = r.material;
+
+        for (int i = 0; i < r.materials.Length; i++)
+        {
+            r.materials[i] = CaptureMat;
+        }
+        
 
         StartCoroutine(CheckCharge());
+
+        ChargeMaxed += CapturedTest;
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Riot"))
+        if (other.CompareTag("Boid"))
         {
-            neighbours.Add(other.gameObject);
+            var b = other.GetComponent<BoidAgent>();
+            if(b.boid_params.team == BoidTeam.ForChangeRiot)
+                neighbours.Add(other.gameObject);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Riot"))
+        if (other.CompareTag("Boid"))
         {
-            neighbours.Remove(other.gameObject);
+            var b = other.GetComponent<BoidAgent>();
+            if (b.boid_params.team == BoidTeam.ForChangeRiot)                
+                neighbours.Remove(other.gameObject);
         }
     }
 

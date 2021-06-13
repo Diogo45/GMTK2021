@@ -126,7 +126,7 @@ Shader "Custom/Capturable"
 					float height_percent = saturate(height / _CaptureHeight);
 
 					//height_percent = height_percent + (((sin(i.worldPos.x * _Time.y) / 10.0f) + 1/10.0f) + ((sin(i.worldPos.y * _Time.y) / 10.0f) + 1 / 10.0f))/2;
-					height_percent = height_percent + (sin( (i.worldPos.x * 10+  i.worldPos.y) / 2 +  _Time.y * 35 * _CapturePercent) / 30.0f * _CapturePercent) + 1/(30.0f * _CapturePercent);
+					height_percent = height_percent + (sin( (i.worldPos.x * 10+  i.worldPos.y) / 2 +  _Time.y * 35 * _CapturePercent) * _CapturePercent /60.0f ) - ( _CapturePercent / 60.0f) - 0.001f;
 
 
 					float4 color;
