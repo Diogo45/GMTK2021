@@ -18,6 +18,7 @@ public class BoidVisualization : MonoBehaviour
         rb = GetComponentInParent<Rigidbody>();
         if(footstepPlayer)
             StartCoroutine(Walk());
+        
         rb.useGravity = true;
 
  

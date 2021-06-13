@@ -57,7 +57,7 @@ public class BoidAgent : MonoBehaviour
         EnemyNeighVis = EnemyNeighboors.Count;
         neighVis = TeamNeighboors.Count;
 
-        if (Leader)
+        if (Leader && boid_params.team == BoidTeam.ForChangeRiot)
         {
             IsLeaderLost();
 
@@ -213,7 +213,7 @@ public class BoidAgent : MonoBehaviour
 
             t.y = 0f;
 
-            var tm = t.magnitude;
+            var tm = t.magnitude > 0 ? t.magnitude : 1f;
 
             s += new Vector2(t.x, t.z).normalized * 1f / tm;
 
@@ -235,7 +235,7 @@ public class BoidAgent : MonoBehaviour
 
             t.y = 0f;
 
-            var tm = t.magnitude;
+            var tm = t.magnitude > 0 ? t.magnitude : 1f;
 
             s += new Vector2(t.x, t.z).normalized * 1f / tm;
 
@@ -298,7 +298,7 @@ public class BoidAgent : MonoBehaviour
             Physics.Raycast(rb.position, obst.transform.position, out RaycastHit hit);
             var t = rb.position - hit.point;
 
-            var tm = t.magnitude;
+            var tm = t.magnitude > 0 ? t.magnitude : 1f;
 
             s += new Vector2(t.x, t.z)/*.normalized * 1f / tm*/;
         }
