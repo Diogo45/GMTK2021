@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PostProcessingOutline
-  m_Shader: {fileID: 4800000, guid: dc99c6c83e97f8043a978b5ccd327e7e, type: 3}
+  m_Name: CapturableMat
+  m_Shader: {fileID: 4800000, guid: 6e74f06e2b546d747b307a163d725919, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -69,6 +69,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
+    - _CaptureHeight: 10
+    - _CapturePercent: 0
     - _CoreShadowWidth: 0.01
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -85,13 +87,13 @@ Material:
     - _OcclusionRadius: 0.05
     - _OcclusionScale: 0.01
     - _OcclusionStrength: 1
-    - _OutlineWidth: 0.3
+    - _OutlineWidth: -1
     - _Parallax: 0.02
     - _PatternRotation: 0
     - _PatternScale: 1
     - _RimFuzziness: 0.05
     - _RimLighting: 0.8
-    - _RimWidth: 0.05
+    - _RimWidth: 0.051
     - _SmoothnessTextureChannel: 0
     - _SpecularFuziness: 0.01
     - _SpecularFuzinessMin: 0.005
@@ -103,15 +105,15 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _AmbientColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _Color: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 0, g: 0.5849056, b: 0.025231257, a: 1}
+    - _Color1: {r: 0.16390419, g: 0.7735849, b: 0, a: 1}
+    - _Color2: {r: 0.35789394, g: 0, b: 0.4716981, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _NoiseCutoff: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
     - _OcclusionBackPlaneOffsets: {r: 0.1, g: 0, b: -0.1, a: 0}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 0}
+    - _OutlineColor: {r: 1, g: 1, b: 1, a: 0}
     - _PatternShadow: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SmoothStepRanges: {r: 0, g: 1, b: 0, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
-    - _T: {r: 0.99, g: 0.00015, b: 0, a: 1}
     - _TargetPosition: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
