@@ -16,10 +16,10 @@ public class StartMenuController : MonoBehaviour
 
     public void Credits()
     {
-        CreditsPanel.SetActive(!IntroPanel.activeSelf);
+        CreditsPanel.SetActive(!CreditsPanel.activeSelf);
     }
 
-    public void StartGamge()
+    public void StartGame()
     {
         SceneManager.LoadScene("BoidsScene");
     }

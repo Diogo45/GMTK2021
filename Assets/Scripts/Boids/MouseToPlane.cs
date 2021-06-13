@@ -12,7 +12,7 @@ public class MouseToPlane : MonoBehaviour
 
     private void Start()
     {
-        Cursor.visible = false;
+        //Cursor.visible = false;
         p = new Plane(Vector3.up, 0);
         rb = GetComponent<Rigidbody>();
     }
