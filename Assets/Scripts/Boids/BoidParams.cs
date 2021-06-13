@@ -10,7 +10,6 @@ public class BoidParams : MonoBehaviour
     [Range(0, 1f)] public float obstacles;
     [Range(5f, 15f)] public float LOS;
 
-    public BoidLeader Leader;
     [Range(0f, 1f)] public float FollowLeader;
     [Range(0f, 1f)] public float DistanceBehindLeader;
 
