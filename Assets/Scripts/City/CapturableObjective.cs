@@ -11,7 +11,7 @@ public class CapturableObjective : MonoBehaviour
     public delegate void OnChargeChange(float charge);
     public delegate void OnChargeMaxed(CapturableObjective obj);
 
-    public static event OnChargeChange ChargeChanged;
+    public event OnChargeChange ChargeChanged;
     public static event OnChargeMaxed ChargeMaxed;
 
     public bool Captured = false;
