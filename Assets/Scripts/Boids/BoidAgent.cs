@@ -129,7 +129,10 @@ public class BoidAgent : MonoBehaviour
                 //_isLeaderLost = false;
                 //_lostLeaderTimer = _lostLeaderTimerValue;
                 if (!_isLeaderLost)
+                {
                     Leader = other.GetComponent<BoidLeader>();
+                    boid_params = Leader.boid_params;
+                }
             }
         }
 
