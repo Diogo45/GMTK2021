@@ -11024,7 +11024,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 931361477}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: FirstStageController, Assembly-CSharp
           m_MethodName: NextStage
           m_Mode: 1
@@ -19256,7 +19256,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 931361476}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e9d676076a784647a5580dff1e59baa, type: 3}
+  m_Script: {fileID: 11500000, guid: ac25bc4003172d14d9fa7b268e55a823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 875829039}
