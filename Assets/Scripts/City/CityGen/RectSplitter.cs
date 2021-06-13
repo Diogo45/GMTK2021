@@ -92,7 +92,7 @@ public static class RectSplitter
 
         int cuts = 0;
 
-        while ((cuts < sparams.MaxCuts && (cuts < sparams.MaxCuts - sparams.RandomCuts)))
+        while (rect_queue.Count > 0 && (cuts < sparams.MaxCuts && (cuts < sparams.MaxCuts - sparams.RandomCuts)))
         {
             var r = rect_queue.Dequeue();
 

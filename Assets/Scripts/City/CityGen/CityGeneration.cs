@@ -43,7 +43,7 @@ public class CityGeneration : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
-            Destroy(child.gameObject);
+            DestroyImmediate(child.gameObject);
         }
 
         var split_params = new RectSplitter.SplitParams
@@ -56,6 +56,8 @@ public class CityGeneration : MonoBehaviour
             RandomCuts = RandomCuts,
             CutMode = CutMode
         };
+
+        CurrentBlocks = new List<Rect>();
 
         CurrentBlocks = RectSplitter.Split(Domain, split_params);
         return CurrentBlocks;
