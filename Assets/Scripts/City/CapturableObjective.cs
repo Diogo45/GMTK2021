@@ -95,8 +95,8 @@ public class CapturableObjective : MonoBehaviour
     {
         if (other.CompareTag("Boid"))
         {
-            var b = other.GetComponent<BoidAgent>();
-            if(b.boid_params.team == BoidTeam.ForChangeRiot)
+            var b = other.GetComponent<Boid>();
+            if(b.boidParameters.Team == Boid.Team.ForChangeRiot)
                 neighbours.Add(other.gameObject);
         }
     }
@@ -105,8 +105,8 @@ public class CapturableObjective : MonoBehaviour
     {
         if (other.CompareTag("Boid"))
         {
-            var b = other.GetComponent<BoidAgent>();
-            if (b.boid_params.team == BoidTeam.ForChangeRiot)                
+            var b = other.GetComponent<Boid>();
+            if (b.boidParameters.Team == Boid.Team.ForChangeRiot)                
                 neighbours.Remove(other.gameObject);
         }
     }

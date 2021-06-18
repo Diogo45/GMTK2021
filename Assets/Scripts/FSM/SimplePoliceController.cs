@@ -29,9 +29,9 @@ public class SimplePoliceController : MonoBehaviour
         {
             yield return new WaitForSeconds(MoveTimer);
             Vector3 v = Vector3.zero;
-            foreach (var n in PlayerCursor.TeamNeighboors)
+            foreach (var n in PlayerCursor.Neighboors)
                 v += n.transform.position;
-            v /= PlayerCursor.TeamNeighboors.Count;
+            v /= PlayerCursor.Neighboors.Count;
             v.y = 0.0f;
             Target = v;
 
