@@ -16,8 +16,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float scroll;
 
 
-    public float _maxZoomT = 0.0004f;
-    public float _minZoomT = 0.00025f;
+    public float maxZoomT = 0.00025f;
+    public float minZoomT = 0.0004f;
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +45,7 @@ public class CameraController : MonoBehaviour
         cam.orthographicSize = new_size;
 
 
-        var new_size_t = Mathf.Lerp(_minZoomT, _maxZoomT, (new_size - _zoomMinMax.x) / (_zoomMinMax.y - _zoomMinMax.x));
+        var new_size_t = Mathf.Lerp(minZoomT, maxZoomT, (new_size - _zoomMinMax.x) / (_zoomMinMax.y - _zoomMinMax.x));
 
         Shader.SetGlobalFloat("_CameraZoomT", new_size_t);
 

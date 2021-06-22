@@ -19794,6 +19794,8 @@ MonoBehaviour:
   _zoomMinMax: {x: 15, y: 40}
   velocity: {x: 0, y: 0}
   scroll: 0
+  maxZoomT: 0.00035
+  minZoomT: 0.00043
 --- !u!1 &1265334724
 GameObject:
   m_ObjectHideFlags: 0
