@@ -95,7 +95,7 @@ Shader "Unlit/NormalOutline"
 
                     //return float4(n_dotx, n_doty, 0, 0);
 
-                    if (m < _T.x | max(depth_dx, depth_dy) > _T.y)
+                    if (m < _T.x | max(depth_dx, depth_dy) > _CameraZoomT)
                         return _Color;
                     else
                         return col;
